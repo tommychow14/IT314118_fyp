@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "426786763951",
+    "firebase_url": "https://tcg-auxiliary-tool-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tcg-auxiliary-tool",
+    "storage_bucket": "tcg-auxiliary-tool.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426786763951:android:8c3ff69c2af2b9deae105a",
+        "android_client_info": {
+          "package_name": "com.example.it314118_fyp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426786763951-bdo5896h4la46ntmvmkv50b1hj4bbs7j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9Oy5X2NUo0YZyUwfzPINsaKIAUNaacB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426786763951-bdo5896h4la46ntmvmkv50b1hj4bbs7j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

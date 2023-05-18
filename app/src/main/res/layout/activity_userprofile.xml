@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF7F7"
+    tools:context=".UserProfileActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="#D8D8D8" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/settings_CardView"
+        android:layout_width="500px"
+        android:layout_height="500px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:translationY="50dp"
+        app:cardElevation="1dp"
+        app:cardCornerRadius="90dp"
+        >
+    <ImageView
+        android:id="@+id/settings_image"
+        android:layout_width="500px"
+        android:layout_height="500px"
+        android:src="@drawable/resource_default"
+        tools:src="@tools:sample/avatars"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/settings_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_CardView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="Display Name"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/settings_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Hi there I'm using Lapit Chat App."
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/settings_image_btn"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_status"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="Change Image" />
+
+    <Button
+        android:id="@+id/settings_nameNstatus_btn"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_image_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Change Name/Status" />
+
+    <Button
+        android:id="@+id/settings_logout_btn"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_nameNstatus_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Logout" />
+
+</RelativeLayout>
