@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+
     <Button
         android:id="@+id/Profilebtn"
         android:layout_width="wrap_content"
@@ -48,6 +49,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtuid"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="157dp"
+        android:layout_marginBottom="46dp"
+        android:text="message"
+        app:layout_constraintBottom_toTopOf="@+id/Profilebtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtuid" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

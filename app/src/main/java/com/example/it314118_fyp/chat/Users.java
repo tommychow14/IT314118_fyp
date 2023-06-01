@@ -1,16 +1,18 @@
-package com.example.it314118_fyp;
+package com.example.it314118_fyp.chat;
 
 public class Users {
     public Users(){}
-    public String name,image,status;
+    public static String name;
+    public static String image;
+    public String status;
 
-    public String getName(){
+    public static String getName(){
         return name;
     }
     public void setName(String name){
         this.name=name;
     }
-    public String getImage(){
+    public static String getImage(){
         return image;
     }
     public void setImage(String image){
