@@ -38,6 +38,9 @@
         <activity android:name=".StatusActivity" android:exported="false"/>
         <activity android:name=".ChatFindActivity" android:exported="false"/>
         <activity android:name=".chat.ChatActivity" android:exported="false"/>
+        <activity android:name=".ChatRBuildActivity" android:exported="false"/>
+        <activity android:name=".multichat.ChatActivity" android:exported="false"/>
+        <activity android:name=".ChatRActivity" android:exported="false"/>
     </application>
 
 </manifest>

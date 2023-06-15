@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextView mtxtuid;
-    private Button mLogoutbtn,mProfilebtn,mChatfindbtn;
+    private Button mLogoutbtn,mProfilebtn,mChatfindbtn,mGroupChatbtn;
     private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         mLogoutbtn = findViewById(R.id.Logoutbtn);
         mProfilebtn = findViewById(R.id.Profilebtn);
         mChatfindbtn = findViewById(R.id.message);
+        mGroupChatbtn = findViewById(R.id.groupmessage);
         mAuth = FirebaseAuth.getInstance();
 
         FirebaseUser user = mAuth.getCurrentUser();
@@ -57,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,ChatFindActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mGroupChatbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ChatRBuildActivity.class);
                 startActivity(intent);
             }
         });
