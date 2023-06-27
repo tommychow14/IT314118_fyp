@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.example.it314118_fyp'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.it314118_fyp"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -33,11 +33,11 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.8'
 
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.firebase:firebase-auth:21.2.0'
-    implementation 'com.google.firebase:firebase-database:20.1.0'
-    implementation 'com.google.firebase:firebase-storage:20.1.0'
+    implementation 'com.google.firebase:firebase-auth:22.0.0'
+    implementation 'com.google.firebase:firebase-database:20.2.2'
+    implementation 'com.google.firebase:firebase-storage:20.2.1'
 
     implementation 'com.firebaseui:firebase-ui-database:8.0.1'
 
