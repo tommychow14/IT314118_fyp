@@ -1,4 +1,4 @@
-package com.example.it314118_fyp;
+package com.example.it314118_fyp.viewController.register;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.it314118_fyp.R;
 import com.example.it314118_fyp.viewController.main.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

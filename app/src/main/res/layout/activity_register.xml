@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@color/white"
-    tools:context=".RegisterActivity">
+    tools:context=".viewController.register.RegisterActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/reg_display_name"

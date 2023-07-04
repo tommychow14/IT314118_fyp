@@ -1,4 +1,4 @@
-package com.example.it314118_fyp.viewController.tcgMain;
+package com.example.it314118_fyp.viewController.home;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,8 +24,6 @@ import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
-import com.google.mlkit.vision.text.TextRecognizerOptionsInterface;
-import com.google.mlkit.vision.text.internal.TextRecognizerOptionsUtils;
 import com.google.mlkit.vision.text.japanese.JapaneseTextRecognizerOptions;
 
 public class CardListActivity extends AppCompatActivity {
