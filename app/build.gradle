@@ -50,4 +50,7 @@ dependencies {
 
     //test recognize google ML(OCR)
     implementation 'com.google.mlkit:text-recognition-japanese:16.0.0'
+
+    //Image Picker Library for Android
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
 }

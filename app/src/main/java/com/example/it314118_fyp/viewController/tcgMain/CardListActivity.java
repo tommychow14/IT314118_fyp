@@ -1,209 +1,135 @@
 package com.example.it314118_fyp.viewController.tcgMain;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupMenu;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.example.it314118_fyp.R;
+import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.Text;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
+import com.google.mlkit.vision.text.TextRecognizerOptionsInterface;
+import com.google.mlkit.vision.text.internal.TextRecognizerOptionsUtils;
+import com.google.mlkit.vision.text.japanese.JapaneseTextRecognizerOptions;
 
 public class CardListActivity extends AppCompatActivity {
 
     Button btnOCRscan;
+    Button btnAddImg;
     EditText etResult;
-
+    ImageView imgScanimg;
+    Uri imgUri;
+    private TextRecognizer textRecognizer;
     private static final String TAG = "CARDLIST_TAG";
-    private String[] cameraPermissions;
-    private Uri imageUri = null;
-    private String[] storagePermissions;
-    private static final int CAMRA_REQUEST_CODE = 100;
-    private static final int STORAGE_REQUEST_CODE = 101;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_list);
 
-        getPermissions();
         setupUI();
-        setupPopMenu();
+        setUpListener();
 
-    }
-
-    //get Permissions
-    private void getPermissions() {
-        cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
     }
 
     //UI init
     private void setupUI() {
+
         btnOCRscan = findViewById(R.id.btn_Scan);
         etResult = findViewById(R.id.et_result);
+        imgScanimg = findViewById(R.id.img_Scanimg);
+        btnAddImg = findViewById(R.id.btn_addimg);
+
+        textRecognizer = TextRecognition.getClient(new JapaneseTextRecognizerOptions.Builder().build());
+
     }
 
-    //scan btn popup menu
-    private void setupPopMenu() {
-        PopupMenu popupMenu = new PopupMenu(this, btnOCRscan);
-        popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+    private void setUpListener() {
+        btnAddImg.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                int id = item.getItemId();
-                if (id == R.id.item_openalbum) {
-                    Log.d(TAG, "onMenuItemClick: Album");
-                    onClickAlbum();
-                } else if (id == R.id.item_opencamera) {
-                    Log.d(TAG, "onMenuItemClick: Camera");
-                    onClickCamera();
-                }
-                return false;
+            public void onClick(View v) {
+                imagePicker();
             }
         });
 
         btnOCRscan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupMenu.show();
+                recognizeText();
             }
         });
     }
 
-    private void onClickCamera() {
-        if (checkCameraPermission()) {
-            pickImageCamera();
+    private void recognizeText() {
+        if (imgUri == null) {
+            Toast.makeText(this, "Pick image first!", Toast.LENGTH_SHORT).show();
         } else {
-            requsetCameraPermission();
+            Toast.makeText(this, "recognizing...", Toast.LENGTH_SHORT).show();
+            try {
+                InputImage inputImage = InputImage.fromFilePath(this, imgUri);
+
+                Task<Text> textTaskResult = textRecognizer.process(inputImage)
+                        .addOnSuccessListener(new OnSuccessListener<Text>() {
+                            @Override
+                            public void onSuccess(Text text) {
+                                String recognizedTest = text.getText();
+                                Log.d(TAG, "onSuccess: " + recognizedTest);
+                                etResult.setText(recognizedTest);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(CardListActivity.this, "Fail recognize text:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            } catch (Exception e) {
+                Toast.makeText(this, "Fail input image:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
-    private ActivityResultLauncher<Intent> cameraActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-
-                    } else {
-                        Toast.makeText(CardListActivity.this, "cancelled", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-    );
-
-    private void onClickAlbum() {
-        if (checkStoragePermission()) {
-            pickImageGallery();
-        } else {
-            requestStoragePermission();
-        }
-    }
-
-    private ActivityResultLauncher<Intent> galleryActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        Intent data = result.getData();
-                        imageUri = data.getData();
-
-                    } else {
-                        Toast.makeText(CardListActivity.this, "cancelled", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-    );
-
-    private boolean checkStoragePermission() {
-
-        boolean result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
-
-        return result;
-    }
-
-    private void requestStoragePermission() {
-        ActivityCompat.requestPermissions(this, storagePermissions, STORAGE_REQUEST_CODE);
-    }
-
-    private boolean checkCameraPermission() {
-        boolean cameraResult = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
-        boolean storageResult = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
-
-        return cameraResult && storageResult;
-    }
-
-    private void requsetCameraPermission() {
-        ActivityCompat.requestPermissions(this, cameraPermissions, CAMRA_REQUEST_CODE);
+    private void imagePicker() {
+        ImagePicker.with(this)
+//                .crop()	    			//Crop image(Optional), Check Customization for more option
+//                .compress(1024)			//Final image size will be less than 1 MB(Optional)
+//                .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                .start();
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
 
-        switch (requestCode) {
-            case CAMRA_REQUEST_CODE: {
-                if (grantResults.length > 0) {
-                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+            //Image Uri will not be null for RESULT_OK
+            Uri uri = data.getData();
 
-                    if (cameraAccepted && storageAccepted) {
-                        pickImageCamera();
-                    } else {
-                        Toast.makeText(this, "permissions is required", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-            case STORAGE_REQUEST_CODE: {
-                if (grantResults.length > 0) {
-                    boolean storageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+            imgUri = uri;
 
-                    if (storageAccepted) {
-                        pickImageGallery();
-                    } else {
-                        Toast.makeText(this, "permissions is required", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
+            // Use Uri object instead of File to avoid storage permissions
+            imgScanimg.setImageURI(uri);
 
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void pickImageGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        galleryActivityResultLauncher.launch(intent);
-    }
-
-    private void pickImageCamera() {
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.TITLE, "Sample Title");
-        values.put(MediaStore.Images.Media.DESCRIPTION, "Sample Description");
-
-        imageUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        cameraActivityResultLauncher.launch(intent);
     }
 }
