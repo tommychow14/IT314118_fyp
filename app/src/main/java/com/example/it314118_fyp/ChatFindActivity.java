@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.it314118_fyp.chat.ChatActivity;
-import com.example.it314118_fyp.chat.Users;
+import com.example.it314118_fyp.viewController.chat.ChatActivity;
+import com.example.it314118_fyp.viewController.chat.Users;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;

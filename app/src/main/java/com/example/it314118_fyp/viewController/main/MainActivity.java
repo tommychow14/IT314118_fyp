@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.it314118_fyp.R;
 
 import com.example.it314118_fyp.databinding.ActivityMainBinding;
+import com.example.it314118_fyp.viewController.chat.ChatFragment;
 import com.example.it314118_fyp.viewController.home.HomeFragment;
 import com.example.it314118_fyp.viewController.profile.ProfileFragment;
 import com.example.it314118_fyp.viewController.setting.SettingsFragment;
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
                 switch (id) {
                     case R.id.home:
                         replaceFragment(new HomeFragment());
+                        break;
+                    case R.id.chat:
+                        replaceFragment(new ChatFragment());
                         break;
                     case R.id.profile:
                         replaceFragment(new ProfileFragment());

@@ -1,4 +1,4 @@
-package com.example.it314118_fyp.chat;
+package com.example.it314118_fyp.viewController.chat;
 
 public class Messages {
     public Messages(String from, int messageType, String message, boolean seen, long time, String type){

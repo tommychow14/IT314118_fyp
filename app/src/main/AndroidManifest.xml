@@ -57,7 +57,7 @@
             android:name=".ChatFindActivity"
             android:exported="false" />
         <activity
-            android:name=".chat.ChatActivity"
+            android:name=".viewController.chat.ChatActivity"
             android:exported="false" />
         <activity
             android:name=".ChatRBuildActivity"

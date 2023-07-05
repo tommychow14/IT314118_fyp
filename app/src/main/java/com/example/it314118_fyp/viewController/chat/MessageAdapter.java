@@ -1,4 +1,4 @@
-package com.example.it314118_fyp.chat;
+package com.example.it314118_fyp.viewController.chat;
 
 import android.util.Base64;
 import android.util.Log;
