@@ -26,6 +26,8 @@ import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.japanese.JapaneseTextRecognizerOptions;
 
+import java.lang.reflect.Array;
+
 public class CardListActivity extends AppCompatActivity {
 
     Button btnOCRscan;
@@ -88,7 +90,11 @@ public class CardListActivity extends AppCompatActivity {
                             public void onSuccess(Text text) {
                                 String recognizedTest = text.getText();
                                 Log.d(TAG, "onSuccess: " + recognizedTest);
-                                etResult.setText(recognizedTest);
+                                String[] ary = recognizedTest.split("\n");
+                                for (String a : ary){
+                                    Log.d(TAG, "onSuccess: "+a);
+                                }
+//                                etResult.setText(recognizedTest);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -105,7 +111,7 @@ public class CardListActivity extends AppCompatActivity {
 
     private void imagePicker() {
         ImagePicker.with(this)
-//                .crop()	    			//Crop image(Optional), Check Customization for more option
+                .crop()	    			//Crop image(Optional), Check Customization for more option
 //                .compress(1024)			//Final image size will be less than 1 MB(Optional)
 //                .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
                 .start();
