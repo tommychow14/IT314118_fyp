@@ -15,23 +15,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_gravity=""
             android:orientation="horizontal">
 
             <Button
+                android:layout_marginStart="10dp"
                 android:id="@+id/btn_addimg"
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/baseline_document_scanner_24"
                 android:text="add Imagea"
                 android:textAllCaps="false" />
 
-            <View
-                android:layout_width="80dp"
-                android:layout_height="0dp" />
+            <Button
+                android:layout_marginStart="10dp"
+                android:id="@+id/btn_popupOCRView"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/baseline_document_scanner_24"
+                android:text="PopUP"
+                android:textAllCaps="false" />
 
             <Button
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:id="@+id/btn_Scan"
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Scan"
                 android:textAllCaps="false" />

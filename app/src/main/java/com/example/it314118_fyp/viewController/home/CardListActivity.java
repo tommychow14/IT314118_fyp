@@ -1,14 +1,19 @@
 package com.example.it314118_fyp.viewController.home;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,9 +37,12 @@ public class CardListActivity extends AppCompatActivity {
 
     Button btnOCRscan;
     Button btnAddImg;
+    Button btnPopupOCRview;
     EditText etResult;
     ImageView imgScanimg;
     Uri imgUri;
+    private Context context;
+    private PopupWindow popupWindow = null;
     private TextRecognizer textRecognizer;
     private static final String TAG = "CARDLIST_TAG";
 
@@ -45,16 +53,34 @@ public class CardListActivity extends AppCompatActivity {
 
         setupUI();
         setUpListener();
+        initPopupWindow();
 
+    }
+
+    private void initPopupWindow() {
+        View view = LayoutInflater.from(context).inflate(R.layout.popupwindow_layout, null);
+        popupWindow = new PopupWindow(view);
+        popupWindow.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setFocusable(false);
+        Button btnConfirm = (Button) view.findViewById(R.id.btnConform);
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
     }
 
     //UI init
     private void setupUI() {
+        context = this;
 
         btnOCRscan = findViewById(R.id.btn_Scan);
         etResult = findViewById(R.id.et_result);
         imgScanimg = findViewById(R.id.img_Scanimg);
         btnAddImg = findViewById(R.id.btn_addimg);
+        btnPopupOCRview = findViewById(R.id.btn_popupOCRView);
 
         textRecognizer = TextRecognition.getClient(new JapaneseTextRecognizerOptions.Builder().build());
 
@@ -74,6 +100,12 @@ public class CardListActivity extends AppCompatActivity {
                 recognizeText();
             }
         });
+        btnPopupOCRview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.showAtLocation(v, Gravity.CENTER_HORIZONTAL, 0, 0);
+            }
+        });
     }
 
     private void recognizeText() {
@@ -91,8 +123,8 @@ public class CardListActivity extends AppCompatActivity {
                                 String recognizedTest = text.getText();
                                 Log.d(TAG, "onSuccess: " + recognizedTest);
                                 String[] ary = recognizedTest.split("\n");
-                                for (String a : ary){
-                                    Log.d(TAG, "onSuccess: "+a);
+                                for (String a : ary) {
+                                    Log.d(TAG, "onSuccess: " + a);
                                 }
 //                                etResult.setText(recognizedTest);
                             }
@@ -111,7 +143,7 @@ public class CardListActivity extends AppCompatActivity {
 
     private void imagePicker() {
         ImagePicker.with(this)
-                .crop()	    			//Crop image(Optional), Check Customization for more option
+                .crop()                    //Crop image(Optional), Check Customization for more option
 //                .compress(1024)			//Final image size will be less than 1 MB(Optional)
 //                .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
                 .start();
