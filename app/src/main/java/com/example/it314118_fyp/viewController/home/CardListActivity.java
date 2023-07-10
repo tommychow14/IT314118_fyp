@@ -126,7 +126,7 @@ public class CardListActivity extends AppCompatActivity {
                                 for (String a : ary) {
                                     Log.d(TAG, "onSuccess: " + a);
                                 }
-//                                etResult.setText(recognizedTest);
+                                etResult.setText(recognizedTest);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
