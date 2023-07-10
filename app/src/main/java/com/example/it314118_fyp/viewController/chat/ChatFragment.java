@@ -2,12 +2,17 @@ package com.example.it314118_fyp.viewController.chat;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.it314118_fyp.ChatFindActivity;
+import com.example.it314118_fyp.ChatRBuildActivity;
 import com.example.it314118_fyp.R;
 
 /**
@@ -25,6 +30,8 @@ public class ChatFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ViewPager2 viewPager;
 
     public ChatFragment() {
         // Required empty public constructor
@@ -61,6 +68,35 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+        viewPager = view.findViewById(R.id.view_pager);
+        viewPager.setAdapter(new ScreenSlidePagerAdapter(this));
+
+
+        return view;
+    }
+
+
+    private class ScreenSlidePagerAdapter extends FragmentStateAdapter {
+        public ScreenSlidePagerAdapter(Fragment fa) {
+            super(fa);
+        }
+
+        @Override
+        public Fragment createFragment(int position) {
+            switch (position) {
+                case 0:
+                    return new ChatRBuildActivity();
+                case 1:
+                    return new ChatFindActivity();
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return 2;
+        }
     }
 }
