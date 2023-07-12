@@ -1,45 +1,64 @@
 package com.example.it314118_fyp.posts;
 
 public class DataClass {
-    private String ImageUrl;
-    private String About;
-    private String Userid;
-    private long Time;
+    private String pId,pTitle,pDetail,pImage,pTime,uid;
 
-    public DataClass(String ImageUrl, String About, String Userid,long Time){
-        this.ImageUrl=ImageUrl;
-        this.About=About;
-        this.Userid=Userid;
-        this.Time=Time;
+    public DataClass(String pId,String pTitle,String pDetail,String pImage,String pTime,String uid){
+        this.pId    = pId;
+        this.pTitle = pTitle;
+        this.pDetail= pDetail;
+        this.pImage = pImage;
+        this.pTime  = pTime;
+        this.uid    = uid;
     }
 
     public DataClass(){}
 
-    public String getImageUrl() {
-        return ImageUrl;
+    public String getpId() {
+        return pId;
     }
 
-    public void setImageUrl(String imageUrl) {
-        ImageUrl = imageUrl;
+    public void setpId(String pId) {
+        this.pId = pId;
     }
 
-    public String getAbout() {
-        return About;
+    public String getpTitle() {
+        return pTitle;
     }
 
-    public void setAbout(String about) {
-        About = about;
+    public void setpTitle(String pTitle) {
+        this.pTitle = pTitle;
     }
 
-    public String getUserid() {
-        return Userid;
+    public String getpDetail() {
+        return pDetail;
     }
 
-    public void setUserid(String userid) {
-        Userid = userid;
+    public void setpDetail(String pDetail) {
+        this.pDetail = pDetail;
     }
 
-    public long getTime() {return Time;}
+    public String getpImage() {
+        return pImage;
+    }
 
-    public void setTime(long time) {Time = time;}
+    public void setpImage(String pImage) {
+        this.pImage = pImage;
+    }
+
+    public String getpTime() {
+        return pTime;
+    }
+
+    public void setpTime(String pTime) {
+        this.pTime = pTime;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 }

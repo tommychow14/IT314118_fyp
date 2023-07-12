@@ -68,6 +68,15 @@
         <activity
             android:name=".ChatRActivity"
             android:exported="false" />
+        <activity
+            android:name=".posts.addpost"
+            android:exported="false" />
+        <activity
+            android:name=".posts.showpost"
+            android:exported="false" />
+        <activity
+            android:name=".posts.PostDetailActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

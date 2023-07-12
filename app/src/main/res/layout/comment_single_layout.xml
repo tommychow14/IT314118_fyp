@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="1dp"
+    app:contentPadding="2dp"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/resource_default"
+            android:id="@+id/usericons"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvname"
+            android:text="name"
+            android:layout_toRightOf="@+id/usericons"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvcomment"
+            android:text="comment"
+            android:layout_below="@+id/tvname"
+            android:layout_toEndOf="@+id/usericons"
+            android:layout_toRightOf="@+id/usericons"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvtime"
+            android:text="00/00/0000"
+            android:layout_below="@+id/tvcomment"
+            android:layout_toEndOf="@+id/usericons"
+            android:layout_toRightOf="@+id/usericons"
+            />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

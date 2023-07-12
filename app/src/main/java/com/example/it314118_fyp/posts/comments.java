@@ -1,42 +1,46 @@
 package com.example.it314118_fyp.posts;
 
 public class comments {
-    private int Like;
-    private String Text;
-    private String Uid;
-    private long Time;
+    String cid,comment,timestamp,uid;
 
-    public comments(int Like, String Text, String Uid, long Time){
-        this.Like=Like;
-        this.Text=Text;
-        this.Uid=Uid;
-        this.Time=Time;
+    public comments(String cid, String comment, String timestamp, String uid){
+        this.cid=cid;
+        this.comment=comment;
+        this.timestamp=timestamp;
+        this.uid=uid;
     }
 
     public comments(){}
 
-    public int getlike() {
-        return Like;
+    public String getCid() {
+        return cid;
     }
 
-    public void setlike(int like) {Like = like;}
-
-    public String gettext() {
-        return Text;
+    public void setCid(String cid) {
+        this.cid = cid;
     }
 
-    public void settext(String text) {Text = text;}
-
-    public String getuid() {
-        return Uid;
+    public String getComment() {
+        return comment;
     }
 
-    public void setuid(String uid) {Uid = uid;}
-
-    public long gettime() {
-        return Time;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
-    public void settime(long time) {Time = time;}
+    public String getTimestamp() {
+        return timestamp;
+    }
 
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 }
