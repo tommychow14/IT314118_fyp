@@ -51,6 +51,7 @@
 
             <TextView
                 android:id="@+id/message_othertext_layout"
+                android:autoLink="all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -98,6 +99,7 @@
 
             <TextView
                 android:id="@+id/message_text_layout"
+                android:autoLink="all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
